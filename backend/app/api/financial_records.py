@@ -9,7 +9,7 @@ from app.schemas.financial_record import (
     FinancialRecordResponse,
 )
 from app.models.kpi import KPI
-from app.services.kpi_measurement_service import calculate_budget_variance_measurement
+from app.services.kpi_measurement_service import create_kpi_measurement
 
 router = APIRouter(
     prefix="/financial-records",
@@ -76,10 +76,15 @@ def calculate_budget_variance_for_record(
             detail="Budget Variance KPI not found",
         )
 
-    measurement = calculate_budget_variance_measurement(
-        db,
-        record,
-        kpi,
+    measurement = create_kpi_measurement(
+        db=db,
+        project_id=record.project_id,
+        kpi=kpi,
+        measurement_date=record.record_date,
+        input_data={
+            "planned_cost": record.planned_cost,
+            "actual_cost": record.actual_cost,
+        },
     )
 
     return {

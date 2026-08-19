@@ -48,12 +48,23 @@ class KPI(Base):
         nullable=False,
     )
 
+    formula_type: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+    )
+
     formula: Mapped[str] = mapped_column(
         Text,
         nullable=False,
     )
 
     is_active: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=True,
+    )
+
+    higher_is_better: Mapped[bool] = mapped_column(
         Boolean,
         nullable=False,
         default=True,

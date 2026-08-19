@@ -1,14 +1,18 @@
-from datetime import date, datetime
-from decimal import Decimal
+from datetime import datetime
 
-from sqlalchemy import Date, DateTime, ForeignKey, JSON, Numeric, String
+from sqlalchemy import (
+    DateTime,
+    ForeignKey,
+    String,
+    Text,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database import Base
 
 
-class KPIMeasurement(Base):
-    __tablename__ = "kpi_measurements"
+class Alert(Base):
+    __tablename__ = "alerts"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -22,23 +26,23 @@ class KPIMeasurement(Base):
         nullable=False,
     )
 
-    value: Mapped[Decimal] = mapped_column(
-        Numeric(12, 2),
-        nullable=False,
-    )
-
-    measurement_date: Mapped[date] = mapped_column(
-        Date,
-        nullable=False,
-    )
-
-    status: Mapped[str] = mapped_column(
+    severity: Mapped[str] = mapped_column(
         String(30),
         nullable=False,
     )
 
-    input_data: Mapped[dict] = mapped_column(
-        JSON,
+    alert_type: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+    )
+
+    message: Mapped[str] = mapped_column(
+        Text,
+        nullable=False,
+    )
+
+    is_resolved: Mapped[bool] = mapped_column(
+        default=False,
         nullable=False,
     )
 

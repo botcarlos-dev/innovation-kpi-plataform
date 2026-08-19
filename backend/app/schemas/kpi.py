@@ -26,7 +26,14 @@ class KPIBase(BaseModel):
     warning_threshold: Decimal
     critical_threshold: Decimal
 
+    formula_type: str = Field(
+        min_length=3,
+        max_length=50,
+    )
+
     formula: str
+
+    higher_is_better: bool = True
 
 
 class KPICreate(KPIBase):
