@@ -10,6 +10,8 @@ from app.services.kpi_engine import (
     evaluate_kpi_status,
 )
 
+from app.services.kpi_alert_service import create_alert_for_measurement
+
 
 def create_kpi_measurement(
     db: Session,
@@ -43,5 +45,11 @@ def create_kpi_measurement(
     db.add(measurement)
     db.commit()
     db.refresh(measurement)
+
+    create_alert_for_measurement(
+        db=db,
+        measurement=measurement,
+        kpi=kpi,
+    )
 
     return measurement

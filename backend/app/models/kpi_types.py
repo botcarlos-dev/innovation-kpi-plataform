@@ -1,0 +1,9 @@
+from enum import Enum
+
+
+class KPIFormulaType(str, Enum):
+    BUDGET_VARIANCE = "BUDGET_VARIANCE"
+    SCHEDULE_VARIANCE = "SCHEDULE_VARIANCE"
+    PROGRESS = "PROGRESS"
+    ROI = "ROI"
+    FORECAST_ACCURACY = "FORECAST_ACCURACY"

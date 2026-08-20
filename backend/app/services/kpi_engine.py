@@ -1,4 +1,5 @@
 from decimal import Decimal
+from app.models.kpi_types import KPIFormulaType
 
 
 def calculate_budget_variance(
@@ -95,31 +96,31 @@ def calculate_kpi(
     data: dict[str, Decimal],
 ) -> Decimal:
 
-    if formula_type == "BUDGET_VARIANCE":
+    if formula_type == KPIFormulaType.BUDGET_VARIANCE:
         return calculate_budget_variance(
             data["planned_cost"],
             data["actual_cost"],
         )
 
-    if formula_type == "SCHEDULE_VARIANCE":
+    if formula_type == KPIFormulaType.SCHEDULE_VARIANCE:
         return calculate_schedule_variance(
             data["planned_progress"],
             data["actual_progress"],
         )
 
-    if formula_type == "PROGRESS":
+    if formula_type == KPIFormulaType.PROGRESS:
         return calculate_progress(
             data["completed"],
             data["total"],
         )
 
-    if formula_type == "ROI":
+    if formula_type == KPIFormulaType.ROI:
         return calculate_roi(
             data["benefit"],
             data["investment"],
         )
 
-    if formula_type == "FORECAST_ACCURACY":
+    if formula_type == KPIFormulaType.FORECAST_ACCURACY:
         return calculate_forecast_accuracy(
             data["actual"],
             data["forecast"],

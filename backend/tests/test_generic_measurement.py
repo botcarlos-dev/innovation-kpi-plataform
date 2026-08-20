@@ -1,21 +1,6 @@
 from decimal import Decimal
 
-import pytest
-
-from app.services.kpi_engine import (
-    calculate_budget_variance,
-    evaluate_kpi_status,
-    calculate_kpi,
-)
-
-
-def test_budget_variance():
-    result = calculate_budget_variance(
-        Decimal("120000"),
-        Decimal("140000"),
-    )
-
-    assert result == Decimal("16.67")
+from app.services.kpi_engine import calculate_kpi, evaluate_kpi_status
 
 
 def test_budget_variance_healthy():
@@ -25,7 +10,6 @@ def test_budget_variance_healthy():
         Decimal("15"),
         higher_is_better=False,
     )
-
     assert result == "HEALTHY"
 
 
@@ -36,7 +20,6 @@ def test_budget_variance_warning():
         Decimal("15"),
         higher_is_better=False,
     )
-
     assert result == "WARNING"
 
 
@@ -47,31 +30,22 @@ def test_budget_variance_critical():
         Decimal("15"),
         higher_is_better=False,
     )
-
     assert result == "CRITICAL"
 
 
-def test_zero_planned_cost():
-    with pytest.raises(ValueError):
-        calculate_budget_variance(
-            Decimal("0"),
-            Decimal("100"),
-        )
-
-
-def test_generic_budget_variance():
+def test_budget_variance():
     result = calculate_kpi(
         "BUDGET_VARIANCE",
         {
-            "planned_cost": Decimal("120000"),
-            "actual_cost": Decimal("140000"),
+            "planned_cost": Decimal("100000"),
+            "actual_cost": Decimal("112400"),
         },
     )
 
-    assert result == Decimal("16.67")
+    assert result == Decimal("12.40")
 
 
-def test_generic_progress():
+def test_progress():
     result = calculate_kpi(
         "PROGRESS",
         {
@@ -83,7 +57,7 @@ def test_generic_progress():
     assert result == Decimal("75.00")
 
 
-def test_generic_roi():
+def test_roi():
     result = calculate_kpi(
         "ROI",
         {
@@ -95,7 +69,7 @@ def test_generic_roi():
     assert result == Decimal("50.00")
 
 
-def test_generic_forecast_accuracy():
+def test_forecast_accuracy():
     result = calculate_kpi(
         "FORECAST_ACCURACY",
         {

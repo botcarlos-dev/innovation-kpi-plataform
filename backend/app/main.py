@@ -7,6 +7,7 @@ from app.database import get_db
 from app.api.kpis import router as kpis_router
 from app.api.financial_records import router as financial_records_router
 from app.api.kpi_measurements import router as kpi_measurements_router
+from app.api.kpi_alerts import router as kpi_alerts_router
 
 app = FastAPI(
     title="Innovation KPI Intelligence Platform",
@@ -17,6 +18,7 @@ app.include_router(projects_router)
 app.include_router(kpis_router)
 app.include_router(financial_records_router)
 app.include_router(kpi_measurements_router)
+app.include_router(kpi_alerts_router)
 
 
 @app.get("/health")

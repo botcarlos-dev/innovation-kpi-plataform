@@ -6,6 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 from app.database import Base
 from app.models import Project
+from app.models.kpi_alert import KPIAlert
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
