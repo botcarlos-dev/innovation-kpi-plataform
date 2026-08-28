@@ -442,3 +442,91 @@
 
   min-height: 300px;
 }
+
+
+
+/* KPI Historical Trends */
+
+.kpi-trend-chart {
+  width: 100%;
+}
+
+
+.chart-controls {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+
+.chart-kpi-selector {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.chart-kpi-selector label {
+  font-size: 0.85rem;
+
+  font-weight: 600;
+}
+
+
+.chart-kpi-selector select {
+  min-width: 240px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  background: white;
+
+  font-size: 0.9rem;
+}
+
+
+.chart-kpi-info {
+  display: flex;
+
+  gap: 24px;
+
+  font-size: 0.9rem;
+
+  color: #666;
+}
+
+
+.chart-kpi-info strong {
+  color: #222;
+
+  margin-left: 4px;
+}
+
+
+@media (max-width: 768px) {
+
+  .chart-controls {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
+  .chart-kpi-info {
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+}

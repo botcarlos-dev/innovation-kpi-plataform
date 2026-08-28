@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import StatCard from "../components/dashboard/StatCard";
 import StatusBadge from "../components/dashboard/StatusBadge";
 import KPIHealthChart from "../components/dashboard/KPIHealthChart";
-
+import KPITrendChart from "../components/dashboard/KPITrendChart";
 import { getProjects } from "../api/projects";
 import { getKPIs } from "../api/kpis";
 import { getMeasurements } from "../api/measurements";
@@ -58,7 +58,8 @@ function Dashboard() {
 
     loadDashboard();
   }, []);
-
+  console.log("First Measurement:", measurements[0]);
+	console.log("First KPI:", kpis[0]);
 
   if (loading) {
     return (
@@ -207,6 +208,26 @@ function Dashboard() {
 
         <KPIHealthChart
           measurements={measurements}
+        />
+      </div>
+
+
+      {/* KPI HISTORICAL TRENDS */}
+      <div className="dashboard-section">
+        <div className="section-header">
+          <div>
+            <h3>KPI Historical Trends</h3>
+
+            <p>
+              Monitor historical KPI performance
+              and identify trends over time.
+            </p>
+          </div>
+        </div>
+
+        <KPITrendChart
+          measurements={measurements}
+          kpis={kpis}
         />
       </div>
 
